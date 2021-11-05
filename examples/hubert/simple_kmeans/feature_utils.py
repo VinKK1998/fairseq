@@ -5,6 +5,7 @@
 
 import logging
 import os
+from re import sub
 import sys
 
 import tqdm
@@ -40,8 +41,15 @@ def get_path_iterator(tsv, nshard, rank):
         lines = lines[start:end]
         def iterate():
             for line in lines:
-                subpath, nsample = line.split("\t")
-                yield f"{root}/{subpath}", int(nsample)
+                try:
+                    subpath, nsample = line.split("\t")
+                except ValueError:
+                    subpath = line.strip()
+                    nsample = None
+                if nsample:
+                    yield f"{root}/{subpath}", int(nsample)
+                else:
+                    yield f"{root}/{subpath}", nsample
     return iterate, len(lines)
 
 

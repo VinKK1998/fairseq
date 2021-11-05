@@ -383,10 +383,7 @@ class TensorboardProgressBarWrapper(BaseProgressBar):
         writer.flush()
 
 
-try:
-    import wandb
-except ImportError:
-    wandb = None
+wandb = None
 
 
 class WandBProgressBarWrapper(BaseProgressBar):

@@ -1,6 +1,6 @@
 # JetBrains PyCharm IDE
 .idea/
-
+.vscode
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -30,7 +30,8 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-
+outputs/
+slurm*
 # Checkpoints
 checkpoints
 
