@@ -279,7 +279,7 @@ class HubertModel(BaseFairseqModel):
         )
 
         self.encoder = TransformerEncoder(cfg)
-        self.layer_norm = LayerNorm(self.embed)
+        self.layer_norm = LayerNorm(cfg.encoder_embed_dim)
 
         self.target_glu = None
         if cfg.target_glu:
@@ -426,7 +426,6 @@ class HubertModel(BaseFairseqModel):
         features_pen = features.float().pow(2).mean()
 
         features = features.transpose(1, 2)
-        features = self.layer_norm(features)
         unmasked_features = features.clone()
 
         if padding_mask is not None:
@@ -435,6 +434,7 @@ class HubertModel(BaseFairseqModel):
         if self.post_extract_proj is not None:
             features = self.post_extract_proj(features)
 
+        features = self.layer_norm(features)
         features = self.dropout_input(features)
         unmasked_features = self.dropout_features(unmasked_features)
 

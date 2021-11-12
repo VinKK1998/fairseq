@@ -36,10 +36,10 @@ task:
 
 dataset:
   num_workers: 6
-  max_tokens: 3200000
+  max_tokens: 2800000
   skip_invalid_size_inputs_valid_test: true
   validate_interval: 5
-  validate_interval_updates: 10000
+  validate_interval_updates: 2500
 
 criterion:
   _name: hubert
@@ -49,7 +49,7 @@ criterion:
 
 optimization:
   max_update: 400000
-  lr: [0.001]
+  lr: [0.00001]
   clip_norm: 10.0
 
 optimizer:

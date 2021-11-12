@@ -5,9 +5,9 @@
 #SBATCH -p compute                              # 作业提交的分区为 compute
 #SBATCH -N 1                                    # 作业申请 1 个节点
 #SBATCH -n 1 
-#SBATCH -t 1-00:00:00                            # 任务运行的最长时间为 1 小时
+#SBATCH -t 7-00:00:00                            # 任务运行的最长时间为 1 小时
 #SBATCH -w gpu27                                 # 指定运行作业的节点
-#SBATCH --gres=gpu:a100-pcie-40gb:2
+#SBATCH --gres=gpu:a100-pcie-40gb:4
 
 pwd; hostname;
 TIME=$(date -Iseconds)
@@ -21,4 +21,4 @@ python -m debugpy --listen 0.0.0.0:55557 fairseq_cli/hydra_train.py \
   task.data=/users8/wtxia/dev/fairseq/datasets \
   task.label_dir=/users8/wtxia/dev/fairseq/datasets \
   task.labels='["km"]' \
-  model.label_rate=100
+  model.label_rate=100q
